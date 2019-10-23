@@ -20,6 +20,7 @@ namespace Compress
             bool[] encodedData = cenc.EncodeTree(cValueNodes, testdata);
             byte[] decodedData = cenc.DecodeTree(cTree, encodedData);
 
+            Console.WriteLine("Size in per cent: {0}", (float)decodedData.Length / testdata.Length);
             Console.WriteLine("Success: {0}", IsDataEqual(decodedData, testdata));
             Console.ReadKey();
         }
