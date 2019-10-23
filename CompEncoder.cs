@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Compress
 {
     class CompEncoder
     {
-        public void CreateTree(byte[] data, out CompNode tree, out CompNodeBase[] valueNodes)
+        public void CreateTree(byte[] data, out CompNode tree, out CompNodeValue[] valueNodes)
         {
             CompNodeComparer nodeComparer = new CompNodeComparer();
             CountedValue[] countedValues = CountValues(data);
@@ -14,7 +15,7 @@ namespace Compress
                 nodes.Add(new CompNodeValue(cv.Value, cv.Count));
             }
 
-            valueNodes = nodes.ToArray();
+            valueNodes = nodes.Cast<CompNodeValue>().ToArray();
 
             while (nodes.Count > 1)
             {
